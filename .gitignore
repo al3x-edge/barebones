@@ -1,12 +1,6 @@
 # folders and files to be ignored by git
 
 ############
-## Bones
-############
-
-Bones.esproj/
-
-############
 ## IDEs
 ############
 
@@ -56,3 +50,5 @@ temp/
 
 *.codekit
 *.scssc
+assets/vendor
+node_modules
