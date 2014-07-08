@@ -1,15 +1,15 @@
 <?php
 /*
-Author: Eddie Machado
-URL: htp://themble.com/bones/
+Author: Alexander Ambrose
+URL: htp://www.fh-group.com
 
 This is where you can drop your custom functions or
 just edit things like thumbnail sizes, header images,
 sidebars, comments, ect.
 */
 
-// LOAD BONES CORE (if you remove this, the theme will break)
-require_once( 'library/bones.php' );
+// LOAD FHGROUP BAREBONES CORE (if you remove this, the theme will break)
+require_once( 'library/barebones.php' );
 
 // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
 require_once( 'library/custom-post-type.php' );
@@ -18,47 +18,47 @@ require_once( 'library/custom-post-type.php' );
 // require_once( 'library/admin.php' );
 
 /*********************
-LAUNCH BONES
+LAUNCH FHGROUP BAREBONES
 Let's get everything up and running.
 *********************/
 
-function bones_ahoy() {
+function barebones_breakdown() {
 
   // let's get language support going, if you need it
   load_theme_textdomain( 'bonestheme', get_template_directory() . '/library/translation' );
 
   // launching operation cleanup
-  add_action( 'init', 'bones_head_cleanup' );
+  add_action( 'init', 'barebones_head_cleanup' );
   // A better title
   add_filter( 'wp_title', 'rw_title', 10, 3 );
   // remove WP version from RSS
-  add_filter( 'the_generator', 'bones_rss_version' );
+  add_filter( 'the_generator', 'barebones_rss_version' );
   // remove pesky injected css for recent comments widget
-  add_filter( 'wp_head', 'bones_remove_wp_widget_recent_comments_style', 1 );
+  add_filter( 'wp_head', 'barebones_remove_wp_widget_recent_comments_style', 1 );
   // clean up comment styles in the head
-  add_action( 'wp_head', 'bones_remove_recent_comments_style', 1 );
+  add_action( 'wp_head', 'barebones_remove_recent_comments_style', 1 );
   // clean up gallery output in wp
-  add_filter( 'gallery_style', 'bones_gallery_style' );
+  add_filter( 'gallery_style', 'barebones_gallery_style' );
 
   // enqueue base scripts and styles
-  add_action( 'wp_enqueue_scripts', 'bones_scripts_and_styles', 999 );
+  add_action( 'wp_enqueue_scripts', 'barebones_scripts_and_styles', 999 );
   // ie conditional wrapper
 
   // launching this stuff after theme setup
-  bones_theme_support();
+  barebones_theme_support();
 
   // adding sidebars to Wordpress (these are created in functions.php)
-  add_action( 'widgets_init', 'bones_register_sidebars' );
+  add_action( 'widgets_init', 'barebones_register_sidebars' );
 
   // cleaning up random code around images
-  add_filter( 'the_content', 'bones_filter_ptags_on_images' );
+  add_filter( 'the_content', 'barebones_filter_ptags_on_images' );
   // cleaning up excerpt
-  add_filter( 'excerpt_more', 'bones_excerpt_more' );
+  add_filter( 'excerpt_more', 'barebones_excerpt_more' );
 
-} /* end bones ahoy */
+} /* end barebones breakdown */
 
 // let's get this party started
-add_action( 'after_setup_theme', 'bones_ahoy' );
+add_action( 'after_setup_theme', 'barebones_breakdown' );
 
 
 /************* OEMBED SIZE OPTIONS *************/
@@ -93,9 +93,9 @@ You can change the names and dimensions to whatever
 you like. Enjoy!
 */
 
-add_filter( 'image_size_names_choose', 'bones_custom_image_sizes' );
+add_filter( 'image_size_names_choose', 'barebones_custom_image_sizes' );
 
-function bones_custom_image_sizes( $sizes ) {
+function barebones_custom_image_sizes( $sizes ) {
     return array_merge( $sizes, array(
         'bones-thumb-600' => __('600px by 150px'),
         'bones-thumb-300' => __('300px by 100px'),
@@ -113,7 +113,7 @@ new image size.
 /************* ACTIVE SIDEBARS ********************/
 
 // Sidebars & Widgetizes Areas
-function bones_register_sidebars() {
+function barebones_register_sidebars() {
 	register_sidebar(array(
 		'id' => 'sidebar1',
 		'name' => __( 'Sidebar 1', 'bonestheme' ),
@@ -154,7 +154,7 @@ function bones_register_sidebars() {
 /************* COMMENT LAYOUT *********************/
 
 // Comment Layout
-function bones_comments( $comment, $args, $depth ) {
+function barebones_comments( $comment, $args, $depth ) {
    $GLOBALS['comment'] = $comment; ?>
   <div id="comment-<?php comment_ID(); ?>" <?php comment_class('cf'); ?>>
     <article  class="cf">
@@ -198,12 +198,12 @@ external fonts. If you're using Google Fonts, you
 can replace these fonts, change it in your scss files
 and be up and running in seconds.
 */
-function bones_fonts() {
+function barebones_fonts() {
   wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
   wp_enqueue_style( 'googleFonts');
 }
 
-add_action('wp_print_styles', 'bones_fonts');
+add_action('wp_print_styles', 'barebones_fonts');
 
 
 
