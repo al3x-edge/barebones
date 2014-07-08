@@ -15,8 +15,13 @@ gulp.task('styles', function() {
 // Site Scripts
 gulp.task('scripts', function() {
   return gulp.src(['assets/coffee/*.coffee', 'assets/coffee/*.js'])
+	.pipe(plugins.coffee())
 	// .pipe(plugins.jshint('.jshintrc'))
 	// .pipe(plugins.jshint.reporter('default'))
+	.pipe(plugins.resolveDependencies({
+    pattern: /\*= require [\s-]*(.*?\.js)/g,
+    log: true
+  }))
 	.pipe(plugins.concat('main.js'))
 	.pipe(plugins.rename({ suffix: '.min' }))
 	.pipe(plugins.uglify())
